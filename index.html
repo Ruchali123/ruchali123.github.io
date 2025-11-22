@@ -178,11 +178,26 @@
   const siteHeader = document.getElementById('siteHeader');
 
   function setTheme(dark){
-    if(dark){ document.documentElement.classList.add('dark'); localStorage.theme='dark'; }
-    else { document.documentElement.classList.remove('dark'); localStorage.theme='light'; }
+  if(dark){
+    document.documentElement.classList.add('dark');
+    localStorage.theme = 'dark';
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.theme = 'light';
   }
-  if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) setTheme(true); else setTheme(false);
-  themeBtn.addEventListener('click', ()=> setTheme(!document.documentElement.classList.contains('dark')));
+}
+
+if (localStorage.theme === 'dark' || 
+   (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  setTheme(true);
+} else {
+  setTheme(false);
+}
+
+themeBtn.addEventListener('click', () => {
+  setTheme(!document.documentElement.classList.contains('dark'));
+});
+
 
   function applyAccent(accent){
     logo.className='w-40 h-40 rounded-xl flex items-center justify-center text-white text-3xl font-bold';
