@@ -29,7 +29,7 @@
           <option value="green">Green</option>
           <option value="pink">Pink</option>
         </select>
-        <!-- <button id="themeBtn" class="p-2 rounded bg-white/10">Toggle</button> -->
+        <button id="themeBtn" class="p-2 rounded bg-white/10">Toggle</button>
       </div>
     </div>
   </header>
@@ -46,9 +46,8 @@
           </div>
         </div>
         <div class="flex justify-center">
-          <div class="flex justify-center">
-  <img src="passport.jpeg" alt="Profile Photo"
-    class="w-40 h-40 rounded-xl object-cover shadow-md border" /></div>
+          <img src="passport.jpeg" alt="Profile Photo" 
+    class="w-40 h-40 rounded-full object-cover shadow-md border" /></div>
         </div>
       </div>
     </section>
@@ -180,26 +179,11 @@
   const siteHeader = document.getElementById('siteHeader');
 
   function setTheme(dark){
-  if(dark){
-    document.documentElement.classList.add('dark');
-    localStorage.theme = 'dark';
-  } else {
-    document.documentElement.classList.remove('dark');
-    localStorage.theme = 'light';
+    if(dark){ document.documentElement.classList.add('dark'); localStorage.theme='dark'; }
+    else { document.documentElement.classList.remove('dark'); localStorage.theme='light'; }
   }
-}
-
-if (localStorage.theme === 'dark' || 
-   (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-  setTheme(true);
-} else {
-  setTheme(false);
-}
-
-themeBtn.addEventListener('click', () => {
-  setTheme(!document.documentElement.classList.contains('dark'));
-});
-
+  if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) setTheme(true); else setTheme(false);
+  themeBtn.addEventListener('click', ()=> setTheme(!document.documentElement.classList.contains('dark')));
 
   function applyAccent(accent){
     logo.className='w-40 h-40 rounded-xl flex items-center justify-center text-white text-3xl font-bold';
@@ -247,3 +231,6 @@ themeBtn.addEventListener('click', () => {
 </script>
 </body>
 </html>
+
+tell me where what to add now
+
