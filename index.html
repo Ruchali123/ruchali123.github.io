@@ -15,7 +15,8 @@
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500">
-  <header id="siteHeader" class="text-white bg-gray-100 dark:bg-gray-900">
+
+  <header id="siteHeader" class="text-white bg-gradient-to-r from-purple-600 to-indigo-600 dark:bg-gray-900">
     <div class="max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
       <div>
         <h1 id="siteTitle" class="text-2xl font-bold">RUCHALI BABULKAR</h1>
@@ -39,14 +40,14 @@
       <div class="grid md:grid-cols-3 gap-6 items-center">
         <div class="md:col-span-2">
           <h2 class="text-3xl font-semibold mb-2">Hi, I'm Ruchali</h2>
-          <p class="text-gray-700 dark:text-gray-300">Enthusiastic Computer Engineering graduate specialized in Machine Learning, Artificial Intelligence, Web Development and Data Analytics. I build useful tools that solve real problems and present data-driven insights.</p>
+          <p class="text-gray-700 dark:text-gray-300">
+            Enthusiastic Computer Engineering graduate specialized in Machine Learning, Artificial Intelligence, Web Development and Data Analytics.
+            I build useful tools that solve real problems and present data-driven insights.
+          </p>
           <div class="mt-4 flex gap-3">
             <a class="px-4 py-2 rounded text-white" id="projectsBtn" href="#projects">View Projects</a>
             <a class="px-4 py-2 rounded border border-gray-300" href="#contact">Contact</a>
           </div>
-        </div>
-        <div class="flex justify-center">
-          <div id="logo" class="w-40 h-40 rounded-xl flex items-center justify-center text-white text-3xl font-bold"></div>
         </div>
       </div>
     </section>
@@ -55,7 +56,7 @@
       <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
         <h4 class="font-semibold">Visitor Count</h4>
         <p id="visitorCount" class="text-2xl mt-2">—</p>
-        <small class="text-gray-500">Total visits</small>
+        <small class="text-gray-500">Total Visits</small>
       </div>
       <div class="p-4 bg-white rounded-lg shadow-sm dark:bg-gray-800">
         <h4 class="font-semibold">GitHub Stats</h4>
@@ -86,20 +87,6 @@
     <section id="projects" class="mb-10">
       <h3 class="text-2xl font-semibold mb-4">Projects</h3>
       <div id="projectsGrid" class="grid md:grid-cols-2 gap-6"></div>
-    </section>
-
-    <section id="blog" class="mb-10">
-      <h3 class="text-2xl font-semibold mb-4">Blog</h3>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-          <h4 class="font-semibold">Latest Posts</h4>
-          <div id="postsList" class="mt-3 space-y-3"></div>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
-          <h4 class="font-semibold">About this blog</h4>
-          <p class="mt-2"></p>
-        </div>
-      </div>
     </section>
 
     <section id="education" class="mb-10">
@@ -141,14 +128,10 @@
           <p class="mt-1"><strong>Email:</strong> <a href="mailto:ruchali12babulkar@gmail.com" class="text-indigo-600">ruchali12babulkar@gmail.com</a></p>
           <p class="mt-1"><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ruchali-babulkar-618242237/" target="_blank" class="text-indigo-600">ruchali-babulkar</a></p>
           <p class="mt-1"><strong>GitHub:</strong> <a href="https://github.com/Ruchali123" target="_blank" class="text-indigo-600">Ruchali123</a></p>
-          <div class="mt-4">
-            <img src="https://github-readme-stats.vercel.app/api?username=Ruchali123&show_icons=true" alt="GitHub Stats" />
-          </div>
         </div>
 
         <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
           <h4 class="font-semibold mb-2">Send me a message</h4>
-          <!-- FormSubmit.co (no backend required) -->
           <form id="contactForm" action="https://formsubmit.co/ruchali12babulkar@gmail.com" method="POST">
             <input type="hidden" name="_captcha" value="false" />
             <label class="block mb-2"><span class="text-sm">Name</span><input name="name" required class="mt-1 block w-full rounded border-gray-200"></label>
@@ -157,7 +140,6 @@
             <input type="hidden" name="_subject" value="New message from Portfolio" />
             <button type="submit" class="mt-2 px-4 py-2 bg-indigo-600 text-white rounded">Send Message</button>
           </form>
-          <p class="text-sm text-gray-500 mt-2">This form uses FormSubmit.co to forward messages to your email. No server required.</p>
         </div>
       </div>
     </section>
@@ -169,10 +151,9 @@
   </main>
 
 <script>
-  // Theme + accent handling
+  // Theme + accent switch
   const themeBtn = document.getElementById('themeBtn');
   const colorPicker = document.getElementById('colorPicker');
-  const logo = document.getElementById('logo');
   const downloadBtn = document.getElementById('downloadBtn');
   const projectsBtn = document.getElementById('projectsBtn');
   const siteHeader = document.getElementById('siteHeader');
@@ -181,27 +162,23 @@
     if(dark){ document.documentElement.classList.add('dark'); localStorage.theme='dark'; }
     else { document.documentElement.classList.remove('dark'); localStorage.theme='light'; }
   }
-  if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) setTheme(true); else setTheme(false);
+  if(localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) setTheme(true);
   themeBtn.addEventListener('click', ()=> setTheme(!document.documentElement.classList.contains('dark')));
 
   function applyAccent(accent){
-    logo.className='w-40 h-40 rounded-xl flex items-center justify-center text-white text-3xl font-bold';
     downloadBtn.className='inline-block px-4 py-2 rounded text-white';
     projectsBtn.className='px-4 py-2 rounded text-white';
     siteHeader.className='';
-    if(accent==='purple'){ logo.classList.add('accent-purple'); downloadBtn.classList.add('bg-purple-600'); projectsBtn.classList.add('bg-purple-600'); siteHeader.classList.add('bg-gradient-to-r','from-purple-600','to-indigo-600'); }
-    else if(accent==='indigo'){ logo.classList.add('accent-indigo'); downloadBtn.classList.add('bg-indigo-600'); projectsBtn.classList.add('bg-indigo-600'); siteHeader.classList.add('bg-gradient-to-r','from-indigo-600','to-green-500'); }
-    else if(accent==='green'){ logo.classList.add('accent-green'); downloadBtn.classList.add('bg-green-600'); projectsBtn.classList.add('bg-green-600'); siteHeader.classList.add('bg-gradient-to-r','from-green-600','to-indigo-600'); }
-    else if(accent==='pink'){ logo.classList.add('accent-pink'); downloadBtn.classList.add('bg-pink-600'); projectsBtn.classList.add('bg-pink-600'); siteHeader.classList.add('bg-gradient-to-r','from-pink-600','to-purple-500'); }
+    if(accent==='purple'){ downloadBtn.classList.add('bg-purple-600'); projectsBtn.classList.add('bg-purple-600'); siteHeader.classList.add('bg-gradient-to-r','from-purple-600','to-indigo-600'); }
+    if(accent==='indigo'){ downloadBtn.classList.add('bg-indigo-600'); projectsBtn.classList.add('bg-indigo-600'); siteHeader.classList.add('bg-gradient-to-r','from-indigo-600','to-green-500'); }
+    if(accent==='green'){ downloadBtn.classList.add('bg-green-600'); projectsBtn.classList.add('bg-green-600'); siteHeader.classList.add('bg-gradient-to-r','from-green-600','to-indigo-600'); }
+    if(accent==='pink'){ downloadBtn.classList.add('bg-pink-600'); projectsBtn.classList.add('bg-pink-600'); siteHeader.classList.add('bg-gradient-to-r','from-pink-600','to-purple-500'); }
     localStorage.accent = accent;
   }
   colorPicker.addEventListener('change', e=> applyAccent(e.target.value));
   applyAccent(localStorage.accent || 'purple');
 
-  // Animated cards
-  window.addEventListener('load', ()=> { document.querySelectorAll('.card').forEach((c,i)=>{ c.classList.add('card-enter'); setTimeout(()=> c.classList.add('card-ready'), 50 + i*120); }); });
-
-  // Projects (from resume)
+  // Projects
   const projects = [
     { title: "CAB BOOKING SYSTEM – SQL Data Analysis", desc: "Designed relational database and advanced SQL queries; analyzed retention, revenue & driver performance (improved allocation by 15%).", link: "https://github.com/Ruchali123/cab-booking-sql-analysis" },
     { title: "FINTRACK – Smart Financial Analytics (Excel Dashboard)", desc: "Interactive Excel dashboard for $5M+ sales across 50+ products and 10 countries; pivot tables & seasonality analysis.", link: "https://github.com/Ruchali123/FinTrack-Excel-Analytics" },
@@ -210,36 +187,27 @@
   const grid = document.getElementById('projectsGrid');
   projects.forEach(p=>{ const el=document.createElement('div'); el.className='card p-5 bg-white rounded-lg shadow-sm dark:bg-gray-800'; el.innerHTML=`<h4 class="font-semibold text-lg mb-2">${p.title}</h4><p class="text-sm text-gray-700 dark:text-gray-300">${p.desc}</p><p class="mt-3"><a class="text-indigo-600" href="${p.link}" target="_blank">View on GitHub →</a></p>`; grid.appendChild(el); });
 
-  // Blog loader
-  async function loadPosts(){
+  // GitHub stats
+  async function loadGitHubStats(){
     try{
-      const res = await fetch('/posts/index.json'); if(!res.ok) return;
-      const idx = await res.json(); const listEl = document.getElementById('postsList');
-      idx.forEach(async post=>{ const md = await fetch('/posts/'+post.file).then(r=>r.text()); const excerpt = md.replace(/[#_*`]/g,'').slice(0,220) + '...'; const item=document.createElement('div'); item.className='p-3 border rounded'; item.innerHTML = `<h5 class="font-semibold">${post.title}</h5><pre class="post-excerpt mt-2">${excerpt}</pre><p class="mt-2"><a href="/posts/${post.html}" class="text-indigo-600">Read more</a></p>`; listEl.appendChild(item); });
-    }catch(e){ console.log('no posts', e); }
+      const res = await fetch('https://api.github.com/users/Ruchali123');
+      const data = await res.json();
+      document.getElementById('githubStars').textContent = `${data.public_repos} repos · ${data.followers} followers`;
+    }catch(e){}
   }
-  loadPosts();
-
-  // GitHub stats (public): show public_repos and followers
-  async function loadGitHubStats(){ try{ const res = await fetch('https://api.github.com/users/Ruchali123'); if(!res.ok) return; const data = await res.json(); document.getElementById('githubStars').textContent = `${data.public_repos} repos · ${data.followers} followers`; }catch(e){console.log(e);} }
   loadGitHubStats();
 
-  // Visitor counter: call serverless endpoint /api/unique-visitor
+  // Visitor counter
   async function updateVisitorCount(){
-  try{
-    const res = await fetch('/api/visitor');
-    if(!res.ok) throw new Error('no count');
-    const json = await res.json();
-    document.getElementById('visitorCount').textContent = json.count;
-  }catch(e){
-    document.getElementById('visitorCount').textContent = '—';
+    try{
+      const res = await fetch('/api/visitor');
+      const json = await res.json();
+      document.getElementById('visitorCount').textContent = json.count;
+    }catch(e){
+      document.getElementById('visitorCount').textContent='—';
+    }
   }
-}
-updateVisitorCount();
-
+  updateVisitorCount();
 </script>
 </body>
 </html>
-
-
-
