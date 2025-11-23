@@ -225,8 +225,18 @@
   loadGitHubStats();
 
   // Visitor counter: call serverless endpoint /api/unique-visitor
-  async function updateVisitorCount(){ try{ const res = await fetch('/api/unique-visitor'); if(!res.ok) throw new Error('no count'); const json = await res.json(); document.getElementById('visitorCount').textContent = json.count; }catch(e){ console.log('visitor api failed', e); document.getElementById('visitorCount').textContent = '—'; } }
-  updateVisitorCount();
+  async function updateVisitorCount(){
+  try{
+    const res = await fetch('/api/visitor');
+    if(!res.ok) throw new Error('no count');
+    const json = await res.json();
+    document.getElementById('visitorCount').textContent = json.count;
+  }catch(e){
+    document.getElementById('visitorCount').textContent = '—';
+  }
+}
+updateVisitorCount();
+
 </script>
 </body>
 </html>
