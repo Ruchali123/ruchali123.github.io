@@ -6,12 +6,8 @@ const redis = new Redis({
 });
 
 export async function GET() {
-  try {
-    const count = await redis.incr("portfolio_visits"); // SIMPLE COUNTER
-    return new Response(JSON.stringify({ count }), {
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (e) {
-    return new Response(JSON.stringify({ count: "error" }));
-  }
+  const count = await redis.incr("portfolio_visits");
+  return new Response(JSON.stringify({ count }), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
