@@ -115,12 +115,19 @@
 // DARK / LIGHT THEME
 const themeBtn = document.getElementById("themeBtn");
 function setTheme(dark){
-  if(dark){ document.documentElement.classList.add("dark"); localStorage.theme="dark"; }
-  else { document.documentElement.classList.remove("dark"); localStorage.theme="light"; }
+  if(dark){
+    document.documentElement.classList.add('dark');
+    localStorage.theme = 'dark';
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.theme = 'light';
+  }
 }
-if(localStorage.theme === "dark") setTheme(true);
-if(localStorage.theme === "light") setTheme(false);
-themeBtn.addEventListener("click", () => setTheme(!document.documentElement.classList.contains("dark")));
+setTheme(localStorage.theme === 'dark');
+
+themeBtn.addEventListener('click', () =>{
+  setTheme(!document.documentElement.classList.contains('dark'));
+});
 
 // ACCENT COLORS
 const colorPicker = document.getElementById("colorPicker");
@@ -136,8 +143,35 @@ function applyAccent(color){
   if(color==="pink"){ downloadBtn.classList.add("bg-pink-600"); projectsBtn.classList.add("bg-pink-600"); siteHeader.classList.add("bg-gradient-to-r","from-pink-600","to-purple-500"); }
   localStorage.accent = color;
 }
-applyAccent(localStorage.accent || "purple");
-colorPicker.addEventListener("change", e => applyAccent(e.target.value));
+function applyAccent(accent){
+  const accents = {
+    purple: {logo: 'accent-purple', headFrom:'from-purple-600', headTo:'to-indigo-600', btn:'bg-purple-600'},
+    indigo: {logo: 'accent-indigo', headFrom:'from-indigo-600', headTo:'to-green-500', btn:'bg-indigo-600'},
+    green: {logo: 'accent-green', headFrom:'from-green-600', headTo:'to-indigo-600', btn:'bg-green-600'},
+    pink: {logo: 'accent-pink', headFrom:'from-pink-600', headTo:'to-purple-500', btn:'bg-pink-600'}
+  };
+
+  const a = accents[accent];
+
+  // clean previous
+  logo.classList.remove('accent-purple','accent-indigo','accent-green','accent-pink');
+  siteHeader.classList.remove(
+    'from-purple-600','to-indigo-600',
+    'from-indigo-600','to-green-500',
+    'from-green-600','to-indigo-600',
+    'from-pink-600','to-purple-500'
+  );
+  downloadBtn.classList.remove('bg-purple-600','bg-indigo-600','bg-green-600','bg-pink-600');
+  projectsBtn.classList.remove('bg-purple-600','bg-indigo-600','bg-green-600','bg-pink-600');
+
+  // apply selected
+  logo.classList.add(a.logo);
+  siteHeader.classList.add('bg-gradient-to-r', a.headFrom, a.headTo);
+  downloadBtn.classList.add(a.btn);
+  projectsBtn.classList.add(a.btn);
+
+  localStorage.accent = accent;
+}
 
 // PROJECTS
 const projects = [
