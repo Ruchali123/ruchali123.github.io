@@ -1,0 +1,17 @@
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+export async function GET() {
+  try {
+    const count = await redis.incr("portfolio_visits"); // SIMPLE COUNTER
+    return new Response(JSON.stringify({ count }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ count: "error" }));
+  }
+}
