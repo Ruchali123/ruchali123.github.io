@@ -1,19 +1,17 @@
-export default async function handler(req, res) {
+import { Redis } from "@upstash/redis";
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+export async function GET() {
   try {
-    const url = process.env.UPSTASH_REDIS_REST_URL;
-    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-    if(!url || !token) return res.status(500).json({ error: 'Missing Upstash env vars' });
-
-    const ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
-    const headers = { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}` };
-
-    await fetch(`${url}/commands`, { method:'POST', headers, body: JSON.stringify(["SADD", "visitors", ip]) });
-    const scard = await fetch(`${url}/commands`, { method:'POST', headers, body: JSON.stringify(["SCARD", "visitors"]) }).then(r=>r.json());
-
-    const count = scard.result ?? scard[0]?.result ?? 0;
-    return res.json({ count });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error:'server error' });
+    const count = await redis.incr("portfolio_visits");   // simple counter
+    return new Response(JSON.stringify({ count }), {
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (e) {
+    return new Response(JSON.stringify({ count: "error" }));
   }
 }
